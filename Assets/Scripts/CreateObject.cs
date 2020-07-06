@@ -13,11 +13,17 @@ public class CreateObject : MonoBehaviour
     List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     ARPlaneManager planeManager;
 
+    FadeController fadeController;
+
     bool isDropped = false; // すでにオトシモノを設置したか
 
     void Awake() {
         raycastManager = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
+    }
+
+    void Start() {
+        fadeController = GameObject.Find("GameDirector").GetComponent<FadeController>();
     }
 
     void Update() {
@@ -35,17 +41,22 @@ public class CreateObject : MonoBehaviour
         float x = Random.Range(-1.0f, 1.0f);
         float z = Random.Range(-1.0f, 1.0f);
 
-        Instantiate(objectPrefab, new Vector3(x, y,z), Quaternion.identity);
+        fadeController.action = () => {
+            Instantiate(objectPrefab, new Vector3(x, y ,z), Quaternion.identity);
 
-        // 平面検知を停止
-        planeManager.detectionMode = PlaneDetectionMode.None;
+            // 平面検知を停止
+            planeManager.detectionMode = PlaneDetectionMode.None;
 
-        // planeManagerを非アクティブ化
-        planeManager.SetTrackablesActive(false);
+            // planeManagerを非アクティブ化
+            planeManager.SetTrackablesActive(false);
 
-        // 平面のプレハブを非アクティブ化
-        planeManager.planePrefab.SetActive(false);
+            // 平面のプレハブを非アクティブ化
+            planeManager.planePrefab.SetActive(false);
 
-        isDropped = true;
+            isDropped = true;
+        };
+
+        // フェードアウト
+        fadeController.isFadeOut = true;
     }
 }
