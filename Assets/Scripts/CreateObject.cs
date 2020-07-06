@@ -13,6 +13,8 @@ public class CreateObject : MonoBehaviour
     List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     ARPlaneManager planeManager;
 
+    bool isDropped = false; // すでにオトシモノを設置したか
+
     void Awake() {
         raycastManager = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
@@ -20,7 +22,7 @@ public class CreateObject : MonoBehaviour
 
     void Update() {
         // タッチ時
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !isDropped) {
             // 衝突時
             if (raycastManager.Raycast(Input.GetTouch(0).position, hitResults, TrackableType.PlaneWithinPolygon)) {
                 DropObject(hitResults[0].pose.position.y);
@@ -43,5 +45,7 @@ public class CreateObject : MonoBehaviour
 
         // 平面のプレハブを非アクティブ化
         planeManager.planePrefab.SetActive(false);
+
+        isDropped = true;
     }
 }
