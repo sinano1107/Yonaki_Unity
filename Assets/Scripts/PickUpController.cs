@@ -31,5 +31,8 @@ public class PickUpController : MonoBehaviour
     
     public void PickUp() {
         Destroy(GameObject.FindGameObjectWithTag(targetTag));
+
+        // テスト用にオブジェクトを拾った際にnextを送信
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 }
