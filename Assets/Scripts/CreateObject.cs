@@ -6,8 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 [RequireComponent(typeof(ARRaycastManager))]
 public class CreateObject : MonoBehaviour
 {
-    [SerializeField]
-    GameObject objectPrefab;
+    public GameObject objectPrefab; // 設置するオブジェクト
 
     ARRaycastManager raycastManager;
     List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
