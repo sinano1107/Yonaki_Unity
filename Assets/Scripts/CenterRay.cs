@@ -5,6 +5,7 @@ using UnityEngine;
 public class CenterRay : MonoBehaviour
 {
     PickUpController pickUpController;
+    NextController nextController;
 
     string state = "";
     Vector3 center = new Vector3(Screen.width/2, Screen.height/2);
@@ -12,7 +13,8 @@ public class CenterRay : MonoBehaviour
     int distance = 3;
 
     void Start() {
-        pickUpController = GameObject.Find("GameDirector").GetComponent<PickUpController>();
+        pickUpController = GetComponent<PickUpController>();
+        nextController = GetComponent<NextController>();
     }
 
     void Update() {
@@ -30,6 +32,9 @@ public class CenterRay : MonoBehaviour
                     active: true,
                     newText: $"{tag}を拾う",
                     newTargetTag: tag);
+                
+                // nextCheck
+                nextController.CheckNext("Find");
             }
         } else {
             // オブジェクトと当たらなかったとき

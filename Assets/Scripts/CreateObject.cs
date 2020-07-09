@@ -13,6 +13,7 @@ public class CreateObject : MonoBehaviour
     ARPlaneManager planeManager;
 
     FadeController fadeController;
+    NextController nextController;
 
     bool isDropped = false; // すでにオトシモノを設置したか
 
@@ -22,7 +23,9 @@ public class CreateObject : MonoBehaviour
     }
 
     void Start() {
-        fadeController = GameObject.Find("GameDirector").GetComponent<FadeController>();
+        GameObject gameDirector = GameObject.Find("GameDirector");
+        fadeController = gameDirector.GetComponent<FadeController>();
+        nextController = gameDirector.GetComponent<NextController>();
     }
 
     void Update() {
@@ -43,6 +46,9 @@ public class CreateObject : MonoBehaviour
 
         fadeController.action = () => {
             Instantiate(objectPrefab, new Vector3(x, y ,z), Quaternion.identity);
+
+            // nextCheck
+            nextController.CheckNext("Drop");
 
             // 平面検知を停止
             planeManager.detectionMode = PlaneDetectionMode.None;

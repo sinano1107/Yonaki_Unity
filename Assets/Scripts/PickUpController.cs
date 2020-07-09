@@ -7,6 +7,7 @@ public class PickUpController : MonoBehaviour
 {
     GameObject pickUpButton;
     GameObject pickUpButtonText;
+    NextController nextController;
 
     string targetTag; // 拾う対象のタグ
 
@@ -14,6 +15,8 @@ public class PickUpController : MonoBehaviour
         pickUpButton = GameObject.Find("PickUpButton");
         pickUpButton.SetActive(false);
         pickUpButtonText = pickUpButton.transform.Find("PickUpButtonText").gameObject;
+
+        nextController = GetComponent<NextController>();
     }
 
     public void TogglePickUpButton(
@@ -32,7 +35,7 @@ public class PickUpController : MonoBehaviour
     public void PickUp() {
         Destroy(GameObject.FindGameObjectWithTag(targetTag));
 
-        // テスト用にオブジェクトを拾った際にnextを送信
-        UnityMessageManager.Instance.SendMessageToFlutter("next");
+        // nextCheck
+        nextController.CheckNext("PickUp");
     }
 }
