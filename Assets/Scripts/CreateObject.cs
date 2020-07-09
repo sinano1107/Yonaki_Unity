@@ -30,7 +30,8 @@ public class CreateObject : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isDropped) {
             // 衝突時
             if (raycastManager.Raycast(Input.GetTouch(0).position, hitResults, TrackableType.PlaneWithinPolygon)) {
-                DropObject(hitResults[0].pose.position.y);
+                if (objectPrefab != null)
+                    DropObject(hitResults[0].pose.position.y);
             }
         }
     }
