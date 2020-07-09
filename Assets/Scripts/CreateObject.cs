@@ -41,11 +41,12 @@ public class CreateObject : MonoBehaviour
 
     // オブジェクトの設置
     void DropObject(float y) {
+        Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
         float x = Random.Range(-1.0f, 1.0f);
         float z = Random.Range(-1.0f, 1.0f);
 
         fadeController.action = () => {
-            Instantiate(objectPrefab, new Vector3(x, y ,z), Quaternion.identity);
+            Instantiate(objectPrefab, new Vector3(cameraPos.x+x, y ,cameraPos.z+z), Quaternion.identity);
 
             // nextCheck
             nextController.CheckNext("Drop");
