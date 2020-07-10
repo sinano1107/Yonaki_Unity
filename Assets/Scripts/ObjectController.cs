@@ -32,4 +32,8 @@ public class ObjectController : MonoBehaviour
 
         fadeController.isFadeOut = true;
     }
+
+    public void DestroyObject(string tag) {
+        Destroy(GameObject.FindGameObjectWithTag(tag));
+    }
 }

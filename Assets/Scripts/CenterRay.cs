@@ -11,7 +11,7 @@ public class CenterRay : MonoBehaviour
     string state = "";
     Vector3 center = new Vector3(Screen.width/2, Screen.height/2);
     RaycastHit hit;
-    int distance = 3;
+    int distance = 10;
 
     void Start() {
         devLog = GetComponent<DevLog>();
