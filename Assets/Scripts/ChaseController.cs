@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class ChaseController : MonoBehaviour
 {
+    DevLog devLog;
+
     GameObject chaser;
     float speed = 0;
 
+    void Start() {
+        devLog = GetComponent<DevLog>();
+    }
+
     void Update() {
         if (chaser != null && speed != 0) {
-            Debug.Log("追いかけます");
+            devLog.SendLog("追いかけます");
             float step = Time.deltaTime * speed;
             Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
             Transform chaserTransform = chaser.GetComponent<Transform>();
@@ -22,18 +28,18 @@ public class ChaseController : MonoBehaviour
 
             // 捕まえたか評価
             if (chaserTransform.position == target) {
-                Debug.Log("プレイヤーと衝突しました");
+                devLog.SendLog("プレイヤーと衝突しました");
             }
         }
     }
 
     public void SetSpeed(string newSpeed) {
-        Debug.Log($"スピードを {newSpeed}% に設定します");
+        devLog.SendLog($"スピードを {newSpeed}% に設定します");
         speed = int.Parse(newSpeed) / 100f;
     }
 
     public void SetChaser(string tag) {
-        Debug.Log($"追いかけてくるオブジェクトを設定します tag: {tag}");
+        devLog.SendLog($"追いかけてくるオブジェクトを設定します tag: {tag}");
         chaser = GameObject.FindGameObjectWithTag(tag);
     }
 }

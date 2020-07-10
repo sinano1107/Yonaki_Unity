@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class NextController : MonoBehaviour
 {
+    DevLog devLog;
+
     public string trigger;
+
+    void Start() {
+        devLog = GetComponent<DevLog>();
+    }
 
     public void CheckNext(string triggerName) {
         if (triggerName == trigger)
-            print("Flutterにnextを送ります");
+            devLog.SendLog("Flutterにnextを送ります");
     }
 }
