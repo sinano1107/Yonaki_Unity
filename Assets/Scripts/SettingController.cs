@@ -8,12 +8,12 @@ public class SettingController : MonoBehaviour
     [SerializeField] GameObject Cube;
     [SerializeField] GameObject Cylinder;
 
-    CreateObject createObject;
+    ObjectController objectController;
     NextController nextController;
     DevLog devLog;
 
     void Start() {
-        createObject = GameObject.Find("AR Session Origin").GetComponent<CreateObject>();
+        objectController = GetComponent<ObjectController>();
         nextController = GetComponent<NextController>();
         devLog = GetComponent<DevLog>();
     }
@@ -40,7 +40,7 @@ public class SettingController : MonoBehaviour
                 break;
         }
 
-        createObject.objectPrefab = newObject;
+        objectController.objectPrefab = newObject;
     }
 
     // nextを送る際のトリガーをセッティング
