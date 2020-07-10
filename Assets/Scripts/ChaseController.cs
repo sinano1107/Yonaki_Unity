@@ -8,6 +8,7 @@ public class ChaseController : MonoBehaviour
 
     GameObject chaser;
     float speed = 0;
+    float collider = 0; // 捕まったと感知する距離
 
     void Start() {
         devLog = GetComponent<DevLog>();
@@ -27,9 +28,12 @@ public class ChaseController : MonoBehaviour
             chaserTransform.position = Vector3.MoveTowards(chaserTransform.position, target, step);
 
             // 捕まえたか評価
-            if (chaserTransform.position == target) {
+            if (Vector3.Distance(chaserTransform.position, target) <= collider) {
                 devLog.SendLog("プレイヤーと衝突しました");
-            }
+                chaser = null;
+                speed = 0;
+                collider = 0;
+            };
         }
     }
 
@@ -41,5 +45,9 @@ public class ChaseController : MonoBehaviour
     public void SetChaser(string tag) {
         devLog.SendLog($"追いかけてくるオブジェクトを設定します tag: {tag}");
         chaser = GameObject.FindGameObjectWithTag(tag);
+    }
+
+    public void SetCollider(string newCollider) {
+        collider = float.Parse(newCollider);
     }
 }
