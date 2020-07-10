@@ -7,7 +7,9 @@ public class NextController : MonoBehaviour
     public string trigger;
 
     public void CheckNext(string triggerName) {
-        if (triggerName == trigger)
+        if (triggerName == trigger) {
+            trigger = null;
             UnityMessageManager.Instance.SendMessageToFlutter("next");
+        }
     }
 }
