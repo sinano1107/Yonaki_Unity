@@ -17,7 +17,6 @@ public class ChaseController : MonoBehaviour
 
     void Update() {
         if (chaser != null && speed != 0) {
-            devLog.SendLog("追いかけます");
             float step = Time.deltaTime * speed;
             Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
             Transform chaserTransform = chaser.GetComponent<Transform>();

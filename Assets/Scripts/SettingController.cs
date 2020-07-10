@@ -20,7 +20,7 @@ public class SettingController : MonoBehaviour
     // オブジェクトのセッティング
     public void SetObjectPrefab(string name) {
         GameObject newObject = Sphere;
-        GetComponent<Dev>().EditDevText($"SetObjectPrefabが起動しました name:{name}");
+        devLog.SendLog($"SetObjectPrefabが起動しました name:{name}");
 
         switch (name) {
             case "Sphere":
