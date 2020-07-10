@@ -67,12 +67,6 @@ public class SettingController : MonoBehaviour
                 devLog.SendLog("拾ったときにnextを送ります");
                 nextController.trigger = "PickUp";
                 break;
-            
-            // 捕まった時
-            case "Caught":
-                Debug.Log("捕まった時にnextを送ります");
-                nextController.trigger = "Caught";
-                break;
 
             default:
                 devLog.SendLog($"未知のトリガーを設定しようとしました。登録されているか確認してください\ntrigger: {trigger}");

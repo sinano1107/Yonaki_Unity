@@ -34,7 +34,7 @@ public class ChaseController : MonoBehaviour
                 chaser = null;
                 speed = 0;
                 collider = 0;
-                nextController.CheckNext("Caught");
+                UnityMessageManager.Instance.SendMessageToFlutter("next");
             }
         }
     }
