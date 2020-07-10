@@ -35,5 +35,6 @@ public class ObjectController : MonoBehaviour
 
     public void DestroyObject(string tag) {
         Destroy(GameObject.FindGameObjectWithTag(tag));
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 }
