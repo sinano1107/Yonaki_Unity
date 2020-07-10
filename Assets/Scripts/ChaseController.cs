@@ -48,6 +48,7 @@ public class ChaseController : MonoBehaviour
     }
 
     public void SetCollider(string newCollider) {
+        devLog.SendLog($"chaserとの当たり判定の距離を {newCollider} に設定します");
         collider = float.Parse(newCollider);
     }
 }
