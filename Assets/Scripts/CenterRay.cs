@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CenterRay : MonoBehaviour
 {
+    DevLog devLog;
     PickUpController pickUpController;
     NextController nextController;
 
@@ -13,6 +14,7 @@ public class CenterRay : MonoBehaviour
     int distance = 3;
 
     void Start() {
+        devLog = GetComponent<DevLog>();
         pickUpController = GetComponent<PickUpController>();
         nextController = GetComponent<NextController>();
     }
@@ -27,7 +29,7 @@ public class CenterRay : MonoBehaviour
             // 状態が変わったとき
             if (state != tag && tag != "Untagged") {
                 state = tag;
-                Debug.Log($"{tag}を見つけました");
+                devLog.SendLog($"{tag}を見つけました");
                 pickUpController.TogglePickUpButton(
                     active: true,
                     newText: $"{tag}を拾う",
@@ -40,7 +42,7 @@ public class CenterRay : MonoBehaviour
             // オブジェクトと当たらなかったとき
             if (state != "") {
                 state = "";
-                Debug.Log("オブジェクトを見失いました");
+                devLog.SendLog("オブジェクトを見失いました");
                 pickUpController.TogglePickUpButton(
                     active: false,
                     newText: "",
