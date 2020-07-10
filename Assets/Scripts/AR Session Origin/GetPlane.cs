@@ -41,6 +41,8 @@ public class GetPlane : MonoBehaviour
                 // 平面のプレハブを非アクティブ化
                 planeManager.planePrefab.SetActive(false);
                 isSaved = true;
+
+                UnityMessageManager.Instance.SendMessageToFlutter("next");
             }
         }
     }

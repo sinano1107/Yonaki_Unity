@@ -49,12 +49,6 @@ public class SettingController : MonoBehaviour
     public void SetTrigger(string trigger) {
         switch (trigger) {
 
-            // オブジェクトを生成した時
-            case "Drop":
-                devLog.SendLog("オブジェクトを生成した時にnextを送ります");
-                nextController.trigger = "Drop";
-                break;
-            
             // 中心に捉えた時
             case "Find":
                 devLog.SendLog("オブジェクトを中心に捉えたときにnextを送ります");
