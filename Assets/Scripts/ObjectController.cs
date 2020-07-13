@@ -23,9 +23,11 @@ public class ObjectController : MonoBehaviour
         float x = Random.Range(-1.0f, 1.0f);
         float z = Random.Range(-1.0f, 1.0f);
         float space = float.Parse(spaceStr); // カメラを中心としたオブジェクトを設置しない範囲
+        x = (x > 0) ? x+space : x-space;
+        z = (z > 0) ? z+space : z-space;
 
         fadeController.action = () => {
-            Instantiate(objectPrefab, new Vector3(space+cameraPos.x+x, planeY , space+cameraPos.z+z), Quaternion.identity);
+            Instantiate(objectPrefab, new Vector3(cameraPos.x+x, planeY , cameraPos.z+z), Quaternion.identity);
 
             UnityMessageManager.Instance.SendMessageToFlutter("next");
         };
