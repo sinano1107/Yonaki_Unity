@@ -7,6 +7,7 @@ public class SettingController : MonoBehaviour
     [SerializeField] GameObject Sphere;
     [SerializeField] GameObject Cube;
     [SerializeField] GameObject Cylinder;
+    [SerializeField] GameObject Sasuke;
 
     ObjectController objectController;
     NextController nextController;
@@ -33,6 +34,10 @@ public class SettingController : MonoBehaviour
             
             case "Cylinder":
                 newObject = Cylinder;
+                break;
+            
+            case "Sasuke":
+                newObject = Sasuke;
                 break;
             
             default:
