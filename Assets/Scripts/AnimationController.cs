@@ -15,10 +15,12 @@ public class AnimationController : MonoBehaviour
     public void SetAnimTarget(string name) {
         devLog.SendLog($"アニメのターゲットを {name} に設定します");
         targetName = name;
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 
-    public void SetAnim(int num) {
+    public void SetAnim(string num) {
         devLog.SendLog($"{targetName} のアニメを {num}に設定します");
-        GameObject.Find($"{targetName}(Clone)").GetComponent<Animator>().SetInteger("Animation", num);
+        GameObject.Find($"{targetName}(Clone)").GetComponent<Animator>().SetInteger("Animation", int.Parse(num));
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 }

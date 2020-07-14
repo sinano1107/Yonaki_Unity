@@ -24,7 +24,7 @@ public class ChaseController : MonoBehaviour
             Vector3 target = new Vector3(cameraPos.x, chaserTransform.position.y, cameraPos.z);
 
             // ユーザーの足元をむく
-            chaserTransform.forward = chaserTransform.position - target;
+            chaserTransform.forward = target - chaserTransform.position;
             // ユーザーの足元を追いかける
             chaserTransform.position = Vector3.MoveTowards(chaserTransform.position, target, step);
 
