@@ -458,7 +458,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Sasuke
+          m_StringArgument: Menasi
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78879952
@@ -1360,6 +1360,7 @@ MonoBehaviour:
     type: 3}
   Sasuke: {fileID: 4527660204104647716, guid: d5dc19504cb9844ffbab5bc55be2012c, type: 3}
   Eyeball: {fileID: 3164456452635385102, guid: f8e5b8926eb4f426a87ff7f30e07eff5, type: 3}
+  Menasi: {fileID: 6826271481117402418, guid: f14781dab9f2440b0882f7a9ac3df7b1, type: 3}
 --- !u!114 &605280726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1907,7 +1908,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Sasuke
+          m_StringArgument: Menasi
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1735006540
