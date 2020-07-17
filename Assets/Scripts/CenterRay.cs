@@ -78,5 +78,6 @@ public class CenterRay : MonoBehaviour
     public void toggleShowGauge() {
         showGauge = !showGauge;
         findGauge.SetActive(showGauge);
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 }
