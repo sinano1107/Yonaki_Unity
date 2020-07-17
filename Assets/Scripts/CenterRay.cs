@@ -51,10 +51,14 @@ public class CenterRay : MonoBehaviour
 
             // ゲージをゼロに
             if (gauge != 0) {
-                gauge = 0;
-                findGauge.GetComponent<Image>().fillAmount = 0;
+                resetGauge();
             }
         }
+    }
+
+    public void resetGauge() {
+        gauge = 0;
+        findGauge.GetComponent<Image>().fillAmount = 0;
     }
 
     void IncreaseFind(string tag) {
