@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CenterRay : MonoBehaviour
 {
+    GameObject findGauge; // 円ゲージ
+    float gauge = 0; // ゲージの値
+
     DevLog devLog;
     PickUpController pickUpController;
     NextController nextController;
@@ -14,6 +18,7 @@ public class CenterRay : MonoBehaviour
     int distance = 10;
 
     void Start() {
+        findGauge = GameObject.Find("FindGauge");
         devLog = GetComponent<DevLog>();
         pickUpController = GetComponent<PickUpController>();
         nextController = GetComponent<NextController>();
@@ -27,16 +32,8 @@ public class CenterRay : MonoBehaviour
             string tag = hit.collider.tag;
 
             // 状態が変わったとき
-            if (state != tag && tag != "Untagged") {
-                state = tag;
-                devLog.SendLog($"{tag}を見つけました");
-                pickUpController.TogglePickUpButton(
-                    active: true,
-                    newText: $"{tag}を拾う",
-                    newTargetTag: tag);
-                
-                // nextCheck
-                nextController.CheckNext("Find");
+            if (state != tag && tag != "Untagged" && gauge <= 1) {
+                IncreaseFind(tag);
             }
         } else {
             // オブジェクトと当たらなかったとき
@@ -48,6 +45,32 @@ public class CenterRay : MonoBehaviour
                     newText: "",
                     newTargetTag: "");
             }
+
+            // ゲージをゼロに
+            if (gauge != 0) {
+                gauge = 0;
+                findGauge.GetComponent<Image>().fillAmount = 0;
+            }
+        }
+    }
+
+    void IncreaseFind(string tag) {
+        float inclease = Time.deltaTime * 0.5f;
+        gauge += inclease;
+        if (gauge <= 1) {
+            findGauge.GetComponent<Image>().fillAmount += inclease;
+        } else {
+            findGauge.GetComponent<Image>().fillAmount = 1;
+
+            state = tag;
+            devLog.SendLog($"{tag}を見つけました");
+            pickUpController.TogglePickUpButton(
+                active: true,
+                newText: $"{tag}を拾う",
+                newTargetTag: tag);
+            
+            // nextCheck
+            nextController.CheckNext("Find");
         }
     }
 }
