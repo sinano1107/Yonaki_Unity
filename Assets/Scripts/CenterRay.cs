@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class CenterRay : MonoBehaviour
 {
-    GameObject findGauge; // 円ゲージ
-    float gauge = 0; // ゲージの値
-
     DevLog devLog;
     PickUpController pickUpController;
     NextController nextController;
+
+    GameObject findGauge; // 円ゲージ
+    float gauge = 0; // ゲージの値
+    bool showGauge = true;
 
     string state = "";
     Vector3 center = new Vector3(Screen.width/2, Screen.height/2);
@@ -32,7 +33,7 @@ public class CenterRay : MonoBehaviour
             string tag = hit.collider.tag;
 
             // 状態が変わったとき
-            if (state != tag && tag != "Untagged" && gauge <= 1) {
+            if (showGauge && gauge <= 1 && state != tag && tag != "Untagged") {
                 IncreaseFind(tag);
             }
         } else {
@@ -72,5 +73,10 @@ public class CenterRay : MonoBehaviour
             // nextCheck
             nextController.CheckNext("Find");
         }
+    }
+
+    public void toggleShowGauge() {
+        showGauge = !showGauge;
+        findGauge.SetActive(showGauge);
     }
 }
