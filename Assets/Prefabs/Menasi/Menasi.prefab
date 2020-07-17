@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 6402242075323334583}
   m_Layer: 0
   m_Name: Menasi
-  m_TagString: Untagged
+  m_TagString: Menasi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
