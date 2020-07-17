@@ -51,7 +51,8 @@ public class CenterRay : MonoBehaviour
 
             // ゲージをゼロに
             if (gauge != 0) {
-                resetGauge();
+                gauge = 0;
+                findGauge.GetComponent<Image>().fillAmount = 0;
             }
         }
     }
@@ -59,6 +60,7 @@ public class CenterRay : MonoBehaviour
     public void resetGauge() {
         gauge = 0;
         findGauge.GetComponent<Image>().fillAmount = 0;
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 
     void IncreaseFind(string tag) {
