@@ -13,11 +13,13 @@ public class SettingController : MonoBehaviour
 
     ObjectController objectController;
     NextController nextController;
+    CenterRay centerRay;
     DevLog devLog;
 
     void Start() {
         objectController = GetComponent<ObjectController>();
         nextController = GetComponent<NextController>();
+        centerRay = GetComponent<CenterRay>();
         devLog = GetComponent<DevLog>();
     }
 
@@ -72,6 +74,8 @@ public class SettingController : MonoBehaviour
             case "Find":
                 devLog.SendLog("オブジェクトを中心に捉えたときにnextを送ります");
                 nextController.trigger = "Find";
+                // 拾うボタンを非表示
+                centerRay.showPickUpButton = false;
                 break;
 
             // 拾った時
