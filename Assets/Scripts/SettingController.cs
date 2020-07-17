@@ -78,6 +78,8 @@ public class SettingController : MonoBehaviour
             case "PickUp":
                 devLog.SendLog("拾ったときにnextを送ります");
                 nextController.trigger = "PickUp";
+                // 拾うボタンを表示
+                centerRay.showPickUpButton = true;
                 break;
 
             default:
