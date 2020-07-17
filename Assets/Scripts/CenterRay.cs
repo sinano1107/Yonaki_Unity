@@ -57,7 +57,7 @@ public class CenterRay : MonoBehaviour
         }
     }
 
-    public void resetGauge() {
+    public void ResetGauge() {
         gauge = 0;
         findGauge.GetComponent<Image>().fillAmount = 0;
         UnityMessageManager.Instance.SendMessageToFlutter("next");
