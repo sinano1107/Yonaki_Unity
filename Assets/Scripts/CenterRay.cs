@@ -9,6 +9,8 @@ public class CenterRay : MonoBehaviour
     PickUpController pickUpController;
     NextController nextController;
 
+    public bool showPickUpButton = true;
+
     GameObject findGauge; // 円ゲージ
     float gauge = 0; // ゲージの値
     bool showGauge = true;
@@ -65,17 +67,19 @@ public class CenterRay : MonoBehaviour
 
             state = tag;
             devLog.SendLog($"{tag}を見つけました");
-            pickUpController.TogglePickUpButton(
-                active: true,
-                newText: $"{tag}を拾う",
-                newTargetTag: tag);
+
+            if (showPickUpButton)
+                pickUpController.TogglePickUpButton(
+                    active: true,
+                    newText: $"{tag}を拾う",
+                    newTargetTag: tag);
             
             // nextCheck
             nextController.CheckNext("Find");
         }
     }
 
-    public void toggleShowGauge() {
+    public void ToggleShowGauge() {
         showGauge = !showGauge;
         findGauge.SetActive(showGauge);
         UnityMessageManager.Instance.SendMessageToFlutter("next");
