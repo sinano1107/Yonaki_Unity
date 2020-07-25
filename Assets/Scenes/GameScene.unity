@@ -469,14 +469,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 605280731}
-        m_MethodName: SetAnimTarget
+        m_MethodName: SetAnim
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menasi
+          m_StringArgument: '{"name": "Menasi", "num": "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78879952
@@ -1371,13 +1371,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 605280731}
         m_MethodName: SetAnim
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: '{"name": "Menasi", "num":  "0"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &551258818
@@ -2249,7 +2249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30CB\u30E1\u306E\u30BF\u30FC\u30B2\u30C3\u30C8\u3092\u8A2D\u5B9A"
+  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A"
 --- !u!222 &1572811190
 CanvasRenderer:
   m_ObjectHideFlags: 0
