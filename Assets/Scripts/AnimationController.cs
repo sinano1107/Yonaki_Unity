@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +13,10 @@ public class AnimationController : MonoBehaviour
         devLog = GetComponent<DevLog>();
     }
 
-    public void SetAnimTarget(string name) {
-        devLog.SendLog($"アニメのターゲットを {name} に設定します");
-        targetName = name;
-    }
-
-    public void SetAnim(int num) {
-        devLog.SendLog($"{targetName} のアニメを {num}に設定します");
-        GameObject.Find($"{targetName}(Clone)").GetComponent<Animator>().SetInteger("Animation", num);
+    public void SetAnim(string strData) {
+        var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
+        devLog.SendLog($"{data["name"]} のアニメを {data["num"]} に設定します");
+        GameObject target = GameObject.FindGameObjectWithTag(data["name"]);
+        target.GetComponent<Animator>().SetInteger("Animation", int.Parse(data["num"]));
     }
 }
