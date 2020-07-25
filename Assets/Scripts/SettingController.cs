@@ -4,60 +4,14 @@ using UnityEngine;
 
 public class SettingController : MonoBehaviour
 {
-    [SerializeField] GameObject Sphere;
-    [SerializeField] GameObject Cube;
-    [SerializeField] GameObject Cylinder;
-    [SerializeField] GameObject Sasuke;
-    [SerializeField] GameObject Eyeball;
-    [SerializeField] GameObject Menasi;
-
-    ObjectController objectController;
     NextController nextController;
     CenterRay centerRay;
     DevLog devLog;
 
     void Start() {
-        objectController = GetComponent<ObjectController>();
         nextController = GetComponent<NextController>();
         centerRay = GetComponent<CenterRay>();
         devLog = GetComponent<DevLog>();
-    }
-
-    // オブジェクトのセッティング
-    public void SetObjectPrefab(string name) {
-        GameObject newObject = Sphere;
-
-        switch (name) {
-            case "Sphere":
-                newObject = Sphere;
-                break;
-
-            case "Cube":
-                newObject = Cube;
-                break;
-            
-            case "Cylinder":
-                newObject = Cylinder;
-                break;
-            
-            case "Sasuke":
-                newObject = Sasuke;
-                break;
-
-            case "Eyeball":
-                newObject = Eyeball;
-                break;
-
-            case "Menasi":
-                newObject = Menasi;
-                break;
-            
-            default:
-                devLog.SendLog($"未知の名前です。登録されているか確認してください\nname: {name}");
-                break;
-        }
-
-        objectController.objectPrefab = newObject;
     }
 
     // nextを送る際のトリガーをセッティング
