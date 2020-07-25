@@ -205,13 +205,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 605280730}
         m_MethodName: CreateObject
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: '{"name": "Eyeball"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &38969992
@@ -860,7 +860,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\u8A2D\u5B9A"
+  m_Text: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\u751F\u6210"
 --- !u!222 &314681617
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1507,13 +1507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c392ded0748bd4bd4ae9f8a5849ca130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sphere: {fileID: 4941524082804591549, guid: 25c9f354334394e4da183b7d0e0a8ad1, type: 3}
-  Cube: {fileID: 5878671720510111439, guid: 761deddcab8d34a60a98ae2a9bf5c8fc, type: 3}
-  Cylinder: {fileID: 4247437005103073319, guid: 73ebdfab243d14a4a98a9cf95856a153,
-    type: 3}
-  Sasuke: {fileID: 4527660204104647716, guid: d5dc19504cb9844ffbab5bc55be2012c, type: 3}
-  Eyeball: {fileID: 3164456452635385102, guid: f8e5b8926eb4f426a87ff7f30e07eff5, type: 3}
-  Menasi: {fileID: 6826271481117402418, guid: f14781dab9f2440b0882f7a9ac3df7b1, type: 3}
 --- !u!114 &605280726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,7 +1569,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898700d9bed6c492da97d547e5ff4bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 0}
+  Sphere: {fileID: 4941524082804591549, guid: 25c9f354334394e4da183b7d0e0a8ad1, type: 3}
+  Cube: {fileID: 5878671720510111439, guid: 761deddcab8d34a60a98ae2a9bf5c8fc, type: 3}
+  Cylinder: {fileID: 4247437005103073319, guid: 73ebdfab243d14a4a98a9cf95856a153,
+    type: 3}
+  Sasuke: {fileID: 4527660204104647716, guid: d5dc19504cb9844ffbab5bc55be2012c, type: 3}
+  Eyeball: {fileID: 3164456452635385102, guid: f8e5b8926eb4f426a87ff7f30e07eff5, type: 3}
+  Menasi: {fileID: 6826271481117402418, guid: f14781dab9f2440b0882f7a9ac3df7b1, type: 3}
   planeY: 0
 --- !u!114 &605280731
 MonoBehaviour:
@@ -2493,15 +2492,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605280725}
-        m_MethodName: SetObjectPrefab
+      - m_Target: {fileID: 605280730}
+        m_MethodName: CreateObject
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menasi
+          m_StringArgument: '{"name": "Menasi"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1735006540
@@ -2610,7 +2609,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\u8A2D\u5B9A"
+  m_Text: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\u751F\u6210"
 --- !u!222 &1767218149
 CanvasRenderer:
   m_ObjectHideFlags: 0
