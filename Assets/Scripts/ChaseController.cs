@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChaseController : MonoBehaviour
 {
-    NextController nextController;
     DevLog devLog;
 
     GameObject chaser;
@@ -12,19 +12,19 @@ public class ChaseController : MonoBehaviour
     float collider = 0; // 捕まったと感知する距離
 
     void Start() {
-        nextController = GetComponent<NextController>();
         devLog = GetComponent<DevLog>();
     }
 
     void Update() {
         if (chaser != null && speed != 0) {
+            devLog.SendLog("追いかけます");
             float step = Time.deltaTime * speed;
             Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
             Transform chaserTransform = chaser.GetComponent<Transform>();
             Vector3 target = new Vector3(cameraPos.x, chaserTransform.position.y, cameraPos.z);
 
             // ユーザーの足元をむく
-            chaserTransform.forward = target - chaserTransform.position;
+            chaserTransform.forward = chaserTransform.position - target;
             // ユーザーの足元を追いかける
             chaserTransform.position = Vector3.MoveTowards(chaserTransform.position, target, step);
 
@@ -34,26 +34,15 @@ public class ChaseController : MonoBehaviour
                 chaser = null;
                 speed = 0;
                 collider = 0;
-                UnityMessageManager.Instance.SendMessageToFlutter("next");
-            }
+            };
         }
     }
 
-    public void SetSpeed(string newSpeed) {
-        devLog.SendLog($"スピードを {newSpeed}% に設定します");
-        speed = int.Parse(newSpeed) / 100f;
-        UnityMessageManager.Instance.SendMessageToFlutter("next");
-    }
-
-    public void SetChaser(string tag) {
-        devLog.SendLog($"追いかけてくるオブジェクトを設定します tag: {tag}");
-        chaser = GameObject.FindGameObjectWithTag(tag);
-        UnityMessageManager.Instance.SendMessageToFlutter("next");
-    }
-
-    public void SetCollider(string newCollider) {
-        devLog.SendLog($"chaserとの当たり判定の距離を {newCollider} に設定します");
-        collider = float.Parse(newCollider);
-        UnityMessageManager.Instance.SendMessageToFlutter("next");
+    public void StartChase(string strData) {
+        var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
+        devLog.SendLog($"{data["tag"]} が {data["newSpeed"]}% の速さで追いかけてきます。 当たり判定は {data["newCollider"]} です");
+        speed = int.Parse(data["newSpeed"]) / 100f;
+        chaser = GameObject.FindGameObjectWithTag(data["tag"]);
+        collider = float.Parse(data["newCollider"]);
     }
 }
