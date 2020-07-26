@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,18 +38,11 @@ public class ChaseController : MonoBehaviour
         }
     }
 
-    public void SetSpeed(string newSpeed) {
-        devLog.SendLog($"スピードを {newSpeed}% に設定します");
-        speed = int.Parse(newSpeed) / 100f;
-    }
-
-    public void SetChaser(string tag) {
-        devLog.SendLog($"追いかけてくるオブジェクトを設定します tag: {tag}");
-        chaser = GameObject.FindGameObjectWithTag(tag);
-    }
-
-    public void SetCollider(string newCollider) {
-        devLog.SendLog($"chaserとの当たり判定の距離を {newCollider} に設定します");
-        collider = float.Parse(newCollider);
+    public void StartChase(string strData) {
+        var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
+        devLog.SendLog($"{data["tag"]} が {data["newSpeed"]}% の速さで追いかけてきます。 当たり判定は {data["newCollider"]} です");
+        speed = int.Parse(data["newSpeed"]) / 100f;
+        chaser = GameObject.FindGameObjectWithTag(data["tag"]);
+        collider = float.Parse(data["newCollider"]);
     }
 }
