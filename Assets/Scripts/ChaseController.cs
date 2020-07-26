@@ -44,5 +44,6 @@ public class ChaseController : MonoBehaviour
         speed = int.Parse(data["newSpeed"]) / 100f;
         chaser = GameObject.FindGameObjectWithTag(data["tag"]);
         collider = float.Parse(data["newCollider"]);
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 }
