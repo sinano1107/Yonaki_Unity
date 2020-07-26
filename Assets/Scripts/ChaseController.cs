@@ -16,15 +16,14 @@ public class ChaseController : MonoBehaviour
     }
 
     void Update() {
-        if (chaser != null && speed != 0) {
-            devLog.SendLog("追いかけます");
+        if (chaser != null) {
             float step = Time.deltaTime * speed;
             Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
             Transform chaserTransform = chaser.GetComponent<Transform>();
             Vector3 target = new Vector3(cameraPos.x, chaserTransform.position.y, cameraPos.z);
 
             // ユーザーの足元をむく
-            chaserTransform.forward = chaserTransform.position - target;
+            chaserTransform.forward = target - chaserTransform.position;
             // ユーザーの足元を追いかける
             chaserTransform.position = Vector3.MoveTowards(chaserTransform.position, target, step);
 
@@ -34,6 +33,7 @@ public class ChaseController : MonoBehaviour
                 chaser = null;
                 speed = 0;
                 collider = 0;
+                UnityMessageManager.Instance.SendMessageToFlutter("next");
             };
         }
     }
