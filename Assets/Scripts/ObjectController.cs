@@ -13,6 +13,7 @@ public class ObjectController : MonoBehaviour
     [SerializeField] GameObject Sasuke;
     [SerializeField] GameObject Eyeball;
     [SerializeField] GameObject Menasi;
+    [SerializeField] GameObject Ichimatu;
 
     public float planeY; // 床の高さ
 
@@ -51,27 +52,24 @@ public class ObjectController : MonoBehaviour
         switch (name) {
             case "Sphere":
                 return Sphere;
-                
             
             case "Cube":
                 return Cube;
-                
 
             case "Cylinder":
                 return Cylinder;
-                
 
             case "Sasuke":
                 return Sasuke;
-                
 
             case "Eyeball":
                 return Eyeball;
-                
 
             case "Menasi":
                 return Menasi;
-                
+
+            case "Ichimatu":
+                return Ichimatu;
 
             default:
                 devLog.SendLog($"未知の名前です。登録されているか確認してください\nname: {name}");
