@@ -476,7 +476,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Menasi", "num": "1"}'
+          m_StringArgument: '{"name": "Eyeball", "num": "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78879952
@@ -1574,10 +1574,9 @@ MonoBehaviour:
   Cylinder: {fileID: 4247437005103073319, guid: 73ebdfab243d14a4a98a9cf95856a153,
     type: 3}
   Sasuke: {fileID: 4527660204104647716, guid: d5dc19504cb9844ffbab5bc55be2012c, type: 3}
-  Eyeball: {fileID: 3164456452635385102, guid: f8e5b8926eb4f426a87ff7f30e07eff5, type: 3}
+  Eyeball: {fileID: 9140624230874807891, guid: 36da989bfee2b45c3ad8b6c7efbd8f25, type: 3}
   Menasi: {fileID: 6826271481117402418, guid: f14781dab9f2440b0882f7a9ac3df7b1, type: 3}
-  Ichimatu: {fileID: 2430661232386737974, guid: e90bcd6ac97af4c8f93f1aecceb1e57d,
-    type: 3}
+  Ichimatu: {fileID: 505594371318710422, guid: cd4061a613214485f8e1733a801b6a3a, type: 3}
   planeY: 0
 --- !u!114 &605280731
 MonoBehaviour:
@@ -2503,7 +2502,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Menasi"}'
+          m_StringArgument: '{"name": "Eyeball"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1735006540
