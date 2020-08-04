@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>540640267721-l3164u355re06mjedstr5qph1dd9h9po.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.540640267721-l3164u355re06mjedstr5qph1dd9h9po</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCba8luCmWrcCsZnF3ssC-dE7HZ4qDRzyk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>540640267721</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sinano1107.yonaki-unity</string>
+	<key>PROJECT_ID</key>
+	<string>yonaki</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yonaki.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:540640267721:ios:f244291e7aa1edbbbc2c18</string>
+	<key>DATABASE_URL</key>
+	<string>https://yonaki.firebaseio.com</string>
+</dict>
+</plist>

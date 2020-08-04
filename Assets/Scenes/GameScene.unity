@@ -211,7 +211,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Ichimatu"}'
+          m_StringArgument: '{"name": "Eyeball", "crc": "1545940661"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &38969992
@@ -476,7 +476,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Eyeball", "num": "1"}'
+          m_StringArgument: '{"name": "Menasi", "num": "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78879952
@@ -959,7 +959,8 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"tag": "Menasi", "newSpeed": "10", "newCollider": "1"}'
+          m_StringArgument: '{"tag": "Ichimatu", "newSpeed": "10", "newCollider":
+            "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &441899069
@@ -1569,14 +1570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898700d9bed6c492da97d547e5ff4bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sphere: {fileID: 4941524082804591549, guid: 25c9f354334394e4da183b7d0e0a8ad1, type: 3}
-  Cube: {fileID: 5878671720510111439, guid: 761deddcab8d34a60a98ae2a9bf5c8fc, type: 3}
-  Cylinder: {fileID: 4247437005103073319, guid: 73ebdfab243d14a4a98a9cf95856a153,
-    type: 3}
-  Sasuke: {fileID: 4527660204104647716, guid: d5dc19504cb9844ffbab5bc55be2012c, type: 3}
-  Eyeball: {fileID: 9140624230874807891, guid: 36da989bfee2b45c3ad8b6c7efbd8f25, type: 3}
-  Menasi: {fileID: 6826271481117402418, guid: f14781dab9f2440b0882f7a9ac3df7b1, type: 3}
-  Ichimatu: {fileID: 505594371318710422, guid: cd4061a613214485f8e1733a801b6a3a, type: 3}
   planeY: 0
 --- !u!114 &605280731
 MonoBehaviour:
@@ -1681,8 +1674,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"tag": "Eyeball", "newSpeed": "20", "newCollider":
-            "0.5"}'
+          m_StringArgument: '{"tag": "Menasi", "newSpeed": "20", "newCollider": "0.5"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &712101627
@@ -2502,7 +2494,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Eyeball"}'
+          m_StringArgument: '{"name": "Sasuke", "crc": "1503224313"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1735006540
