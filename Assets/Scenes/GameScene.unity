@@ -211,7 +211,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Eyeball", "crc": "1545940661"}'
+          m_StringArgument: '{"name": "ichimatu", "crc": "3787310697"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &38969992
@@ -2494,7 +2494,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Sasuke", "crc": "1503224313"}'
+          m_StringArgument: '{"name": "sasuke", "crc": "2315166480"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1735006540

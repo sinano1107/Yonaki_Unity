@@ -89,11 +89,20 @@ public class ObjectController : MonoBehaviour
                 var prefab = bundle.LoadAssetAsync(name);
                 // AR空間に生成
                 var newObject = (GameObject)Instantiate(prefab.asset, position, Quaternion.identity);
+                // 親にタグを登録
+                newObject.tag = "Object";
+                // 子にタグを登録
+                List<GameObject> children = GetAllChildren.GetAll(newObject);
+                foreach (GameObject obj in children) {
+                    obj.tag = "Object";
+                }
+                
                 fadeController.isFadeIn = true;
             }
         }
     }
 
+    // オブジェクトを削除
     public void DestroyObject(string tag) {
         Destroy(GameObject.FindGameObjectWithTag(tag));
     }
