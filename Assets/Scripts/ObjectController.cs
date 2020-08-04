@@ -19,6 +19,10 @@ public class ObjectController : MonoBehaviour
     FadeController fadeController;
     NextController nextController;
 
+    AssetBundle assetBundle;
+    // アセットバンドルの記録用
+    Dictionary<string, UnityEngine.Object> assets = new Dictionary<string, UnityEngine.Object>();
+
     void Start() {
         // Firebase初期化
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
@@ -41,14 +45,31 @@ public class ObjectController : MonoBehaviour
         Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
         float x = Random.Range(-1.0f, 1.0f);
         float z = Random.Range(-1.0f, 1.0f);
+        Vector3 position = new Vector3(cameraPos.x, planeY, cameraPos.z);
 
         fadeController.action = () => {
-            // ここでコルーチンスタート
-            //Instantiate(objectPrefab, new Vector3(cameraPos.x+x, planeY ,cameraPos.z+z), Quaternion.identity);
-            LoadUri(
-                data["name"],
-                new Vector3(cameraPos.x, planeY, cameraPos.z),
-                uint.Parse(data["crc"]));
+            if (assets.ContainsKey(data["name"])) {
+                // すでにAssetを読み込んでいたら
+                // AR空間に生成
+                var newObject = (GameObject)Instantiate(assets[data["name"]], position, Quaternion.identity);
+                // 親にタグを登録
+                newObject.tag = "Object";
+                // 子にタグを登録
+                List<GameObject> children = GetAllChildren.GetAll(newObject);
+                foreach (GameObject obj in children) {
+                    obj.tag = "Object";
+                }
+
+                fadeController.isFadeIn = true;
+            } else {
+                // Assetを読み込んでいない場合
+                // ここでコルーチンスタート
+                //Instantiate(objectPrefab, new Vector3(cameraPos.x+x, planeY ,cameraPos.z+z), Quaternion.identity);
+                LoadUri(
+                    data["name"],
+                    position,
+                    uint.Parse(data["crc"]));
+            }
 
             // nextCheck
             nextController.CheckNext("Create");
@@ -85,8 +106,9 @@ public class ObjectController : MonoBehaviour
             } else {
                 // ダウンロード成功
                 Debug.Log("AssetBundleのダウンロードに成功");
-                var bundle = DownloadHandlerAssetBundle.GetContent(uwr);
-                var prefab = bundle.LoadAssetAsync(name);
+                assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
+                var prefab = assetBundle.LoadAssetAsync(name);
+                assets[name] = prefab.asset;
                 // AR空間に生成
                 var newObject = (GameObject)Instantiate(prefab.asset, position, Quaternion.identity);
                 // 親にタグを登録
@@ -96,7 +118,7 @@ public class ObjectController : MonoBehaviour
                 foreach (GameObject obj in children) {
                     obj.tag = "Object";
                 }
-                
+
                 fadeController.isFadeIn = true;
             }
         }
@@ -105,5 +127,10 @@ public class ObjectController : MonoBehaviour
     // オブジェクトを削除
     public void DestroyObject(string tag) {
         Destroy(GameObject.FindGameObjectWithTag(tag));
+    }
+
+    // AssetBundleのアンロード
+    public void Unload() {
+        assetBundle.Unload(true);
     }
 }
