@@ -125,8 +125,8 @@ public class ObjectController : MonoBehaviour
     }
 
     // オブジェクトを削除
-    public void DestroyObject(string tag) {
-        Destroy(GameObject.FindGameObjectWithTag(tag));
+    public void DestroyObject() {
+        Destroy(GameObject.FindGameObjectWithTag("Object"));
     }
 
     // AssetBundleのアンロード

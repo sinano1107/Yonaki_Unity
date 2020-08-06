@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 38969992}
   - component: {fileID: 38969991}
   m_Layer: 5
-  m_Name: CreateObjectButton
+  m_Name: CreateObjectButton_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 78879952}
   - component: {fileID: 78879951}
   m_Layer: 5
-  m_Name: SetAnimTargetButton
+  m_Name: SetAnimButton_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,7 +476,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Menasi", "num": "1"}'
+          m_StringArgument: '{"num": "0"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78879952
@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 441899069}
   - component: {fileID: 441899068}
   m_Layer: 5
-  m_Name: testButton
+  m_Name: destroyObjectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -952,7 +952,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 605280730}
-        m_MethodName: test
+        m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1301,7 +1301,7 @@ GameObject:
   - component: {fileID: 551258818}
   - component: {fileID: 551258817}
   m_Layer: 5
-  m_Name: SetAnimButton
+  m_Name: SetAnimButton_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1378,7 +1378,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Ichimatu", "num":  "1"}'
+          m_StringArgument: '{"num":  "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &551258818
@@ -1597,7 +1597,7 @@ GameObject:
   - component: {fileID: 712101627}
   - component: {fileID: 712101626}
   m_Layer: 5
-  m_Name: ToggleGaugeButton
+  m_Name: StartChaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1674,7 +1674,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"tag": "Menasi", "newSpeed": "20", "newCollider": "0.5"}'
+          m_StringArgument: '{"newSpeed": "20", "newCollider": "0.5"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &712101627
@@ -1872,7 +1872,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: test
+  m_Text: destroyObject
 --- !u!222 &954478116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1950,7 +1950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A"
+  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A_1"
 --- !u!222 &1072261075
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2243,7 +2243,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A"
+  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A_0"
 --- !u!222 &1572811190
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2417,7 +2417,7 @@ GameObject:
   - component: {fileID: 1735006540}
   - component: {fileID: 1735006539}
   m_Layer: 5
-  m_Name: SetObjectButton
+  m_Name: CreateObjectButton_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
