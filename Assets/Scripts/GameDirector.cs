@@ -22,6 +22,8 @@ public class GameDirector : MonoBehaviour
     }
 
     public void Restart() {
+        // AssetBundleのアンロード
+        GetComponent<ObjectController>().Unload();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

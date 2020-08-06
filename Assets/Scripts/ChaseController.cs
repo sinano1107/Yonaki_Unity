@@ -40,9 +40,9 @@ public class ChaseController : MonoBehaviour
 
     public void StartChase(string strData) {
         var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
-        devLog.SendLog($"{data["tag"]} が {data["newSpeed"]}% の速さで追いかけてきます。 当たり判定は {data["newCollider"]} です");
+        devLog.SendLog($"{data["newSpeed"]}% の速さで追いかけてきます。 当たり判定は {data["newCollider"]} です");
         speed = int.Parse(data["newSpeed"]) / 100f;
-        chaser = GameObject.FindGameObjectWithTag(data["tag"]);
+        chaser = GameObject.FindGameObjectWithTag("Object");
         collider = float.Parse(data["newCollider"]);
         UnityMessageManager.Instance.SendMessageToFlutter("next");
     }

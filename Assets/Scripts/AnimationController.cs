@@ -15,8 +15,8 @@ public class AnimationController : MonoBehaviour
 
     public void SetAnim(string strData) {
         var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
-        devLog.SendLog($"{data["name"]} のアニメを {data["num"]} に設定します");
-        GameObject target = GameObject.FindGameObjectWithTag(data["name"]);
+        devLog.SendLog($"アニメを {data["num"]} に設定します");
+        GameObject target = GameObject.FindGameObjectWithTag("Object");
         target.GetComponent<Animator>().SetInteger("Animation", int.Parse(data["num"]));
         UnityMessageManager.Instance.SendMessageToFlutter("next");
     }

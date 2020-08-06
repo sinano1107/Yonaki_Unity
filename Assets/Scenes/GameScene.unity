@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 38969992}
   - component: {fileID: 38969991}
   m_Layer: 5
-  m_Name: CreateObjectButton
+  m_Name: CreateObjectButton_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Ichimatu"}'
+          m_StringArgument: '{"name": "ichimatu", "crc": "3787310697"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &38969992
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 78879952}
   - component: {fileID: 78879951}
   m_Layer: 5
-  m_Name: SetAnimTargetButton
+  m_Name: SetAnimButton_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,7 +476,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Menasi", "num": "1"}'
+          m_StringArgument: '{"num": "0"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &78879952
@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 441899069}
   - component: {fileID: 441899068}
   m_Layer: 5
-  m_Name: SetTriggerButton
+  m_Name: destroyObjectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -951,15 +951,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 605280728}
-        m_MethodName: StartChase
-        m_Mode: 5
+      - m_Target: {fileID: 605280730}
+        m_MethodName: DestroyObject
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"tag": "Menasi", "newSpeed": "10", "newCollider": "1"}'
+          m_StringArgument: '{"tag": "Ichimatu", "newSpeed": "10", "newCollider":
+            "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &441899069
@@ -1300,7 +1301,7 @@ GameObject:
   - component: {fileID: 551258818}
   - component: {fileID: 551258817}
   m_Layer: 5
-  m_Name: SetAnimButton
+  m_Name: SetAnimButton_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1377,7 +1378,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Ichimatu", "num":  "1"}'
+          m_StringArgument: '{"num":  "1"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &551258818
@@ -1569,15 +1570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898700d9bed6c492da97d547e5ff4bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sphere: {fileID: 4941524082804591549, guid: 25c9f354334394e4da183b7d0e0a8ad1, type: 3}
-  Cube: {fileID: 5878671720510111439, guid: 761deddcab8d34a60a98ae2a9bf5c8fc, type: 3}
-  Cylinder: {fileID: 4247437005103073319, guid: 73ebdfab243d14a4a98a9cf95856a153,
-    type: 3}
-  Sasuke: {fileID: 4527660204104647716, guid: d5dc19504cb9844ffbab5bc55be2012c, type: 3}
-  Eyeball: {fileID: 3164456452635385102, guid: f8e5b8926eb4f426a87ff7f30e07eff5, type: 3}
-  Menasi: {fileID: 6826271481117402418, guid: f14781dab9f2440b0882f7a9ac3df7b1, type: 3}
-  Ichimatu: {fileID: 2430661232386737974, guid: e90bcd6ac97af4c8f93f1aecceb1e57d,
-    type: 3}
   planeY: 0
 --- !u!114 &605280731
 MonoBehaviour:
@@ -1605,7 +1597,7 @@ GameObject:
   - component: {fileID: 712101627}
   - component: {fileID: 712101626}
   m_Layer: 5
-  m_Name: ToggleGaugeButton
+  m_Name: StartChaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1682,8 +1674,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"tag": "Eyeball", "newSpeed": "20", "newCollider":
-            "0.5"}'
+          m_StringArgument: '{"newSpeed": "20", "newCollider": "0.5"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &712101627
@@ -1881,7 +1872,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: StartChase
+  m_Text: destroyObject
 --- !u!222 &954478116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1959,7 +1950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A"
+  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A_1"
 --- !u!222 &1072261075
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2252,7 +2243,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A"
+  m_Text: "\u30A2\u30CB\u30E1\u3092\u8A2D\u5B9A_0"
 --- !u!222 &1572811190
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2426,7 +2417,7 @@ GameObject:
   - component: {fileID: 1735006540}
   - component: {fileID: 1735006539}
   m_Layer: 5
-  m_Name: SetObjectButton
+  m_Name: CreateObjectButton_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2503,7 +2494,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"name": "Menasi"}'
+          m_StringArgument: '{"name": "sasuke", "crc": "2315166480"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1735006540

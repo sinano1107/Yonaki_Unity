@@ -1,45 +1,68 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using UnityEngine.Networking;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using Firebase;
+using Firebase.Storage;
 
 public class ObjectController : MonoBehaviour
 {
-    [SerializeField] GameObject Sphere;
-    [SerializeField] GameObject Cube;
-    [SerializeField] GameObject Cylinder;
-    [SerializeField] GameObject Sasuke;
-    [SerializeField] GameObject Eyeball;
-    [SerializeField] GameObject Menasi;
-    [SerializeField] GameObject Ichimatu;
-
     public float planeY; // 床の高さ
 
     DevLog devLog;
     FadeController fadeController;
     NextController nextController;
 
+    AssetBundle assetBundle;
+    // アセットバンドルの記録用
+    Dictionary<string, UnityEngine.Object> assets = new Dictionary<string, UnityEngine.Object>();
+
     void Start() {
+        // Firebase初期化
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available) {
+                devLog.SendLog("Firebase初期化成功");
+            } else {
+                devLog.SendLog("Firebase初期化失敗");
+            }
+        });
+
         devLog = GetComponent<DevLog>();
         fadeController = GetComponent<FadeController>();
         nextController = GetComponent<NextController>();
     }
 
     // オブジェクトの設置
-    public void CreateObject(string strData) {
+    public async void CreateObject(string strData) {
         var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
-        GameObject objectPrefab = getObjectPrefab(data["name"]);
         Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
         float x = Random.Range(-1.0f, 1.0f);
         float z = Random.Range(-1.0f, 1.0f);
         float space = float.Parse(data["space"]); // カメラを中心としたオブジェクトを設置しない範囲
         x = (x > 0) ? x+space : x-space;
         z = (z > 0) ? z+space : z-space;
+        Vector3 position = new Vector3(cameraPos.x+x, planeY, cameraPos.z+z);
 
         fadeController.action = () => {
-            Instantiate(objectPrefab, new Vector3(cameraPos.x+x, planeY , cameraPos.z+z), Quaternion.identity);
+            if (assets.ContainsKey(data["name"])) {
+                // すでにAssetを読み込んでいたら
+                InstantiateObject(assets[data["name"]], position);
+            } else {
+                // Assetを読み込んでいない場合
+                // ここでコルーチンスタート
+                //Instantiate(objectPrefab, new Vector3(cameraPos.x+x, planeY ,cameraPos.z+z), Quaternion.identity);
+                LoadUri(
+                    data["name"],
+                    position,
+                    uint.Parse(data["crc"]));
+            }
 
             UnityMessageManager.Instance.SendMessageToFlutter("next");
         };
@@ -47,38 +70,65 @@ public class ObjectController : MonoBehaviour
         fadeController.isFadeOut = true;
     }
 
-    // objectPrefabを取得する
-    GameObject getObjectPrefab(string name) {
-        switch (name) {
-            case "Sphere":
-                return Sphere;
-            
-            case "Cube":
-                return Cube;
+    // URIを取得
+    async void LoadUri(string name, Vector3 position, uint crc) {
+        // ストレージアクセスインスタンスの取得
+        var _storage = FirebaseStorage.DefaultInstance;
+        // 作成したストレージURIを指定
+        var storage_ref = _storage.GetReferenceFromUrl("gs://yonaki.appspot.com");
+        // ダウンロードしたいAssetBundleのストレージ内におけるパスを指定
+        var prefab_ref = storage_ref.Child($"prefabs/{name}");
+        // AssetBundleのURIを取得
+        await prefab_ref.GetDownloadUrlAsync().ContinueWith((Task<Uri> fetchTask) => {
+            if (!fetchTask.IsFaulted && !fetchTask.IsCanceled) {
+                devLog.SendLog("URI取得成功");
+                StartCoroutine(LoadAsset(fetchTask.Result.AbsoluteUri, name, position, crc));
+            } else {
+                devLog.SendLog("URI取得失敗");
+            }
+        });
+    }
 
-            case "Cylinder":
-                return Cylinder;
-
-            case "Sasuke":
-                return Sasuke;
-
-            case "Eyeball":
-                return Eyeball;
-
-            case "Menasi":
-                return Menasi;
-
-            case "Ichimatu":
-                return Ichimatu;
-
-            default:
-                devLog.SendLog($"未知の名前です。登録されているか確認してください\nname: {name}");
-                return Sasuke;
+    // Assetを取得・設置
+    IEnumerator LoadAsset(string uri, string name, Vector3 position, uint crc) {
+        using (UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(uri, 0, crc)) {
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError || uwr.isHttpError) {
+                devLog.SendLog($"AssetBundleのダウンロードに失敗しました: {uwr.error}");
+            } else {
+                // ダウンロード成功
+                devLog.SendLog("AssetBundleのダウンロードに成功");
+                assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
+                var prefab = assetBundle.LoadAssetAsync(name);
+                assets[name] = prefab.asset;
+                InstantiateObject(prefab.asset, position);
+            }
         }
     }
 
-    public void DestroyObject(string tag) {
-        Destroy(GameObject.FindGameObjectWithTag(tag));
+    void InstantiateObject(UnityEngine.Object prefab, Vector3 position) {
+        // AR空間に生成
+        var newObject = (GameObject)Instantiate(prefab, position, Quaternion.identity);
+        // 親にタグを登録
+        newObject.tag = "Object";
+        // 子にタグを登録
+        List<GameObject> children = GetAllChildren.GetAll(newObject);
+        foreach (GameObject obj in children) {
+            obj.tag = "Object";
+        }
+
+        fadeController.isFadeIn = true;
         UnityMessageManager.Instance.SendMessageToFlutter("next");
+    }
+
+    // オブジェクトを削除
+    public void DestroyObject() {
+        Destroy(GameObject.FindGameObjectWithTag("Object"));
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
+    }
+
+    // AssetBundleのアンロード
+    public void Unload() {
+        assetBundle.Unload(true);
     }
 }

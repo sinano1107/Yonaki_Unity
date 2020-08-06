@@ -44,7 +44,6 @@ public class FadeController : MonoBehaviour
         if (alfa >= 1) {
             isFadeOut = false;
             action();
-            isFadeIn = true;
         }
     }
 
