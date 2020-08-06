@@ -50,17 +50,7 @@ public class ObjectController : MonoBehaviour
         fadeController.action = () => {
             if (assets.ContainsKey(data["name"])) {
                 // すでにAssetを読み込んでいたら
-                // AR空間に生成
-                var newObject = (GameObject)Instantiate(assets[data["name"]], position, Quaternion.identity);
-                // 親にタグを登録
-                newObject.tag = "Object";
-                // 子にタグを登録
-                List<GameObject> children = GetAllChildren.GetAll(newObject);
-                foreach (GameObject obj in children) {
-                    obj.tag = "Object";
-                }
-
-                fadeController.isFadeIn = true;
+                InstantiateObject(assets[data["name"]], position);
             } else {
                 // Assetを読み込んでいない場合
                 // ここでコルーチンスタート
@@ -109,19 +99,23 @@ public class ObjectController : MonoBehaviour
                 assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
                 var prefab = assetBundle.LoadAssetAsync(name);
                 assets[name] = prefab.asset;
-                // AR空間に生成
-                var newObject = (GameObject)Instantiate(prefab.asset, position, Quaternion.identity);
-                // 親にタグを登録
-                newObject.tag = "Object";
-                // 子にタグを登録
-                List<GameObject> children = GetAllChildren.GetAll(newObject);
-                foreach (GameObject obj in children) {
-                    obj.tag = "Object";
-                }
-
-                fadeController.isFadeIn = true;
+                InstantiateObject(prefab.asset, position);
             }
         }
+    }
+
+    void InstantiateObject(UnityEngine.Object prefab, Vector3 position) {
+        // AR空間に生成
+        var newObject = (GameObject)Instantiate(prefab, position, Quaternion.identity);
+        // 親にタグを登録
+        newObject.tag = "Object";
+        // 子にタグを登録
+        List<GameObject> children = GetAllChildren.GetAll(newObject);
+        foreach (GameObject obj in children) {
+            obj.tag = "Object";
+        }
+
+        fadeController.isFadeIn = true;
     }
 
     // オブジェクトを削除
