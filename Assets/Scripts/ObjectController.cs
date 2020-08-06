@@ -28,9 +28,9 @@ public class ObjectController : MonoBehaviour
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available) {
-                Debug.Log("Firebase初期化成功");
+                devLog.SendLog("Firebase初期化成功");
             } else {
-                Debug.Log("Firebase初期化失敗");
+                devLog.SendLog("Firebase初期化失敗");
             }
         });
 
@@ -89,10 +89,10 @@ public class ObjectController : MonoBehaviour
         // AssetBundleのURIを取得
         await prefab_ref.GetDownloadUrlAsync().ContinueWith((Task<Uri> fetchTask) => {
             if (!fetchTask.IsFaulted && !fetchTask.IsCanceled) {
-                Debug.Log("URI取得成功");
+                devLog.SendLog("URI取得成功");
                 StartCoroutine(LoadAsset(fetchTask.Result.AbsoluteUri, name, position, crc));
             } else {
-                Debug.Log("URI取得失敗");
+                devLog.SendLog("URI取得失敗");
             }
         });
     }
@@ -102,10 +102,10 @@ public class ObjectController : MonoBehaviour
         using (UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(uri, 0, crc)) {
             yield return uwr.SendWebRequest();
             if (uwr.isNetworkError || uwr.isHttpError) {
-                Debug.Log($"AssetBundleのダウンロードに失敗しました: {uwr.error}");
+                devLog.SendLog($"AssetBundleのダウンロードに失敗しました: {uwr.error}");
             } else {
                 // ダウンロード成功
-                Debug.Log("AssetBundleのダウンロードに成功");
+                devLog.SendLog("AssetBundleのダウンロードに成功");
                 assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
                 var prefab = assetBundle.LoadAssetAsync(name);
                 assets[name] = prefab.asset;
