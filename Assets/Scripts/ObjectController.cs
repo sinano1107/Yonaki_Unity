@@ -8,8 +8,6 @@ using Random = UnityEngine.Random;
 using UnityEngine.Networking;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using Firebase;
-using Firebase.Storage;
 
 public class ObjectController : MonoBehaviour
 {
@@ -24,16 +22,6 @@ public class ObjectController : MonoBehaviour
     Dictionary<string, UnityEngine.Object> assets = new Dictionary<string, UnityEngine.Object>();
 
     void Start() {
-        // Firebase初期化
-        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
-            var dependencyStatus = task.Result;
-            if (dependencyStatus == Firebase.DependencyStatus.Available) {
-                devLog.SendLog("Firebase初期化成功");
-            } else {
-                devLog.SendLog("Firebase初期化失敗");
-            }
-        });
-
         devLog = GetComponent<DevLog>();
         fadeController = GetComponent<FadeController>();
         nextController = GetComponent<NextController>();
@@ -54,8 +42,8 @@ public class ObjectController : MonoBehaviour
             } else {
                 // Assetを読み込んでいない場合
                 // ここでコルーチンスタート
-                //Instantiate(objectPrefab, new Vector3(cameraPos.x+x, planeY ,cameraPos.z+z), Quaternion.identity);
-                LoadUri(
+                LoadAsset(
+                    data["uri"],
                     data["name"],
                     position,
                     uint.Parse(data["crc"]));
@@ -66,25 +54,6 @@ public class ObjectController : MonoBehaviour
         };
 
         fadeController.isFadeOut = true;
-    }
-
-    // URIを取得
-    async void LoadUri(string name, Vector3 position, uint crc) {
-        // ストレージアクセスインスタンスの取得
-        var _storage = FirebaseStorage.DefaultInstance;
-        // 作成したストレージURIを指定
-        var storage_ref = _storage.GetReferenceFromUrl("gs://yonaki.appspot.com");
-        // ダウンロードしたいAssetBundleのストレージ内におけるパスを指定
-        var prefab_ref = storage_ref.Child($"prefabs/{name}");
-        // AssetBundleのURIを取得
-        await prefab_ref.GetDownloadUrlAsync().ContinueWith((Task<Uri> fetchTask) => {
-            if (!fetchTask.IsFaulted && !fetchTask.IsCanceled) {
-                devLog.SendLog("URI取得成功");
-                StartCoroutine(LoadAsset(fetchTask.Result.AbsoluteUri, name, position, crc));
-            } else {
-                devLog.SendLog("URI取得失敗");
-            }
-        });
     }
 
     // Assetを取得・設置
