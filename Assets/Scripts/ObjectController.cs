@@ -51,8 +51,6 @@ public class ObjectController : MonoBehaviour
                     position,
                     uint.Parse(data["crc"])));
             }
-
-            UnityMessageManager.Instance.SendMessageToFlutter("next");
         };
 
         fadeController.isFadeOut = true;
