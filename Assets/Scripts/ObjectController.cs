@@ -42,11 +42,11 @@ public class ObjectController : MonoBehaviour
             } else {
                 // Assetを読み込んでいない場合
                 // ここでコルーチンスタート
-                LoadAsset(
+                StartCoroutine(LoadAsset(
                     data["uri"],
                     data["name"],
                     position,
-                    uint.Parse(data["crc"]));
+                    uint.Parse(data["crc"])));
             }
 
             // nextCheck
