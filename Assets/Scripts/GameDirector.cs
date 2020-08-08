@@ -21,9 +21,9 @@ public class GameDirector : MonoBehaviour
         planeManager.planePrefab.SetActive(true);
     }
 
-    public void Restart() {
+    public void Sleep() {
         // AssetBundleのアンロード
         GetComponent<ObjectController>().Unload();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Scenes/SleepScene");
     }
 }
