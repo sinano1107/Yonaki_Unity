@@ -9,6 +9,7 @@ public class GetPlane : MonoBehaviour
     ARRaycastManager raycastManager;
     List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     ARPlaneManager planeManager;
+    ARPointCloudManager pointCloudManager;
 
     ObjectController objectController;
 
@@ -17,6 +18,7 @@ public class GetPlane : MonoBehaviour
     void Awake() {
         raycastManager = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
+        pointCloudManager = GetComponent<ARPointCloudManager>();
     }
 
     void Start() {
@@ -40,6 +42,15 @@ public class GetPlane : MonoBehaviour
 
                 // 平面のプレハブを非アクティブ化
                 planeManager.planePrefab.SetActive(false);
+
+                // 新規点群検知を停止
+                pointCloudManager.enabled = false;
+
+                // 全ての点群を削除
+                foreach (var Point in pointCloudManager.trackables) {
+                    Point.gameObject.SetActive(false);
+                }
+
                 isSaved = true;
 
                 UnityMessageManager.Instance.SendMessageToFlutter("next");
