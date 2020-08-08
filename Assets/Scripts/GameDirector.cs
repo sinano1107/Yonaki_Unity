@@ -23,6 +23,7 @@ public class GameDirector : MonoBehaviour
 
     public void Sleep() {
         // AssetBundleのアンロード
+        GetComponent<DevLog>().SendLog("スリープします");
         GetComponent<ObjectController>().Unload();
         SceneManager.LoadScene("Scenes/SleepScene");
     }

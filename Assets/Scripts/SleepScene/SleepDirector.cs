@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SleepDirector : MonoBehaviour
 {
     public void Restart() {
+        GetComponent<DevLog>().SendLog("リスタートします");
         SceneManager.LoadScene("Scenes/GameScene");
     }
 }
