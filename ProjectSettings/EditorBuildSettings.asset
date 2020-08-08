@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 7757b6b85fa684df680a3677cf14f45b
+  - enabled: 1
+    path: Assets/Scenes/SleepScene.unity
+    guid: 92db2c438387b4615969845f17f8de28
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: cd1faa4f0a8774bb293cc2f22b7e4126,
       type: 2}

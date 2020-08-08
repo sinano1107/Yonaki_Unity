@@ -94,6 +94,7 @@ public class ObjectController : MonoBehaviour
 
     // AssetBundleのアンロード
     public void Unload() {
-        assetBundle.Unload(true);
+        if (assetBundle != null)
+            assetBundle.Unload(true);
     }
 }
