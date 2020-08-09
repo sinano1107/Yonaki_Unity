@@ -45,7 +45,6 @@ public class CenterRay : MonoBehaviour
                 devLog.SendLog("オブジェクトを見失いました");
                 pickUpController.TogglePickUpButton(
                     active: false,
-                    newText: "",
                     newTargetTag: "");
             }
 
@@ -78,7 +77,6 @@ public class CenterRay : MonoBehaviour
             if (showPickUpButton)
                 pickUpController.TogglePickUpButton(
                     active: true,
-                    newText: $"{tag}を拾う",
                     newTargetTag: tag);
             
             // nextCheck
