@@ -46,6 +46,9 @@ public class GetPlane : MonoBehaviour
                 // 新規点群検知を停止
                 pointCloudManager.enabled = false;
 
+                // メッセージを削除
+                GameObject.Find("Message").SetActive(false);
+
                 // 全ての点群を削除
                 foreach (var Point in pointCloudManager.trackables) {
                     Point.gameObject.SetActive(false);
