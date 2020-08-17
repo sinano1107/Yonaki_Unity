@@ -72,14 +72,11 @@ public class ObjectController : MonoBehaviour
     }
 
     void InstantiateObject(Object prefab, Vector3 cameraPos, int number, float space) {
+        Vector3[] positiones = RandomPositiones(cameraPos, number, space);
         for (int i=0; i<number; i++) // 個数分繰り返す
         {
             // positionの演算
-            float x = Random.Range(-1.0f, 1.0f);
-            float z = Random.Range(-1.0f, 1.0f);
-            x = (x > 0) ? x + space : x - space;
-            z = (z > 0) ? z + space : z - space;
-            Vector3 position = new Vector3(cameraPos.x + x, planeY, cameraPos.z + z);
+            Vector3 position = positiones[i];
 
             // 角度の算出
             float yRotation = Random.Range(-180f, 180f);
@@ -97,6 +94,41 @@ public class ObjectController : MonoBehaviour
         }
 
         fadeController.isFadeIn = true;
+    }
+
+    // ドーナツ状の座標を取得
+    Vector3[] RandomPositiones(Vector3 cameraPos, int number, float space) {
+        float max = space + 1;
+        float min = space;
+
+        Vector3[] answer = new Vector3[number];
+
+        float x;
+        float z;
+
+        float xAbs;
+        float zAbs;
+
+        float maxR = Mathf.Pow(max, 2);
+        float minR = Mathf.Pow(min, 2);
+
+        for (int i = 0; i < number; i++)
+        {
+            while (answer[i].x == 0)
+            {
+                x = Random.Range(-max, max);
+                z = Random.Range(-max, max);
+
+                xAbs = Mathf.Abs(Mathf.Pow(x, 2));
+                zAbs = Mathf.Abs(Mathf.Pow(z, 2));
+
+                // 特定の範囲内か確認
+                if (maxR > xAbs + zAbs && xAbs + zAbs > minR)
+                    answer[i] = new Vector3(cameraPos.x+x, planeY, cameraPos.z+z);
+            }
+        }
+
+        return answer;
     }
 
     // オブジェクトを削除
