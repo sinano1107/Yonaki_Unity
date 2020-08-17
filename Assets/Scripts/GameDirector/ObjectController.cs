@@ -81,8 +81,11 @@ public class ObjectController : MonoBehaviour
             z = (z > 0) ? z + space : z - space;
             Vector3 position = new Vector3(cameraPos.x + x, planeY, cameraPos.z + z);
 
+            // 角度の算出
+            float yRotation = Random.Range(-180f, 180f);
+
             // AR空間に生成
-            var newObject = (GameObject)Instantiate(prefab, position, Quaternion.identity);
+            var newObject = (GameObject)Instantiate(prefab, position, Quaternion.Euler(0, yRotation, 0));
             // 親にタグを登録
             newObject.tag = "Object";
             // 子にタグを登録
