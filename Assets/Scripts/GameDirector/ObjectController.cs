@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Networking;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 
 public class ObjectController : MonoBehaviour
 {
@@ -28,25 +24,27 @@ public class ObjectController : MonoBehaviour
     }
 
     // オブジェクトの設置
-    public async void CreateObject(string strData) {
+    public void CreateObject(string strData) {
         var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(strData);
         Vector3 cameraPos = Camera.main.GetComponent<Transform>().position;
-        float x = Random.Range(-1.0f, 1.0f);
-        float z = Random.Range(-1.0f, 1.0f);
-        Vector3 position = new Vector3(cameraPos.x, planeY, cameraPos.z);
+        int number = int.Parse(data["number"]); // 個数
+        float space = float.Parse(data["space"]); // カメラを中心としたオブジェクトを設置しない範囲
 
         fadeController.action = () => {
             if (assets.ContainsKey(data["name"])) {
                 // すでにAssetを読み込んでいたら
-                InstantiateObject(assets[data["name"]], position);
+                InstantiateObject(assets[data["name"]], cameraPos, number, space);
             } else {
                 // Assetを読み込んでいない場合
                 // ここでコルーチンスタート
                 StartCoroutine(LoadAsset(
                     data["uri"],
                     data["name"],
-                    position,
-                    uint.Parse(data["crc"])));
+                    cameraPos, 
+                    uint.Parse(data["crc"]),
+                    number,
+                    space
+                ));
             }
 
             // nextCheck
@@ -57,7 +55,7 @@ public class ObjectController : MonoBehaviour
     }
 
     // Assetを取得・設置
-    IEnumerator LoadAsset(string uri, string name, Vector3 position, uint crc) {
+    IEnumerator LoadAsset(string uri, string name, Vector3 cameraPos, uint crc, int number, float space) {
         using (UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(uri, 0, crc)) {
             yield return uwr.SendWebRequest();
             if (uwr.isNetworkError || uwr.isHttpError) {
@@ -68,20 +66,31 @@ public class ObjectController : MonoBehaviour
                 assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
                 var prefab = assetBundle.LoadAssetAsync(name);
                 assets[name] = prefab.asset;
-                InstantiateObject(prefab.asset, position);
+                InstantiateObject(prefab.asset, cameraPos, number, space);
             }
         }
     }
 
-    void InstantiateObject(UnityEngine.Object prefab, Vector3 position) {
-        // AR空間に生成
-        var newObject = (GameObject)Instantiate(prefab, position, Quaternion.identity);
-        // 親にタグを登録
-        newObject.tag = "Object";
-        // 子にタグを登録
-        List<GameObject> children = GetAllChildren.GetAll(newObject);
-        foreach (GameObject obj in children) {
-            obj.tag = "Object";
+    void InstantiateObject(Object prefab, Vector3 cameraPos, int number, float space) {
+        for (int i=0; i<number; i++) // 個数分繰り返す
+        {
+            // positionの演算
+            float x = Random.Range(-1.0f, 1.0f);
+            float z = Random.Range(-1.0f, 1.0f);
+            x = (x > 0) ? x + space : x - space;
+            z = (z > 0) ? z + space : z - space;
+            Vector3 position = new Vector3(cameraPos.x + x, planeY, cameraPos.z + z);
+
+            // AR空間に生成
+            var newObject = (GameObject)Instantiate(prefab, position, Quaternion.identity);
+            // 親にタグを登録
+            newObject.tag = "Object";
+            // 子にタグを登録
+            List<GameObject> children = GetAllChildren.GetAll(newObject);
+            foreach (GameObject obj in children)
+            {
+                obj.tag = "Object";
+            }
         }
 
         fadeController.isFadeIn = true;
