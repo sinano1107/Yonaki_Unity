@@ -15,7 +15,7 @@ public class ObjectController : MonoBehaviour
 
     AssetBundle assetBundle;
     // アセットバンドルの記録用
-    Dictionary<string, UnityEngine.Object> assets = new Dictionary<string, UnityEngine.Object>();
+    Dictionary<string, Object> assets = new Dictionary<string, Object>();
 
     void Start() {
         devLog = GetComponent<DevLog>();
@@ -89,7 +89,7 @@ public class ObjectController : MonoBehaviour
             List<GameObject> children = GetAllChildren.GetAll(newObject);
             foreach (GameObject obj in children)
             {
-                obj.tag = "Object";
+                obj.tag = "CH_Object";
             }
         }
 
@@ -133,7 +133,11 @@ public class ObjectController : MonoBehaviour
 
     // オブジェクトを削除
     public void DestroyObject() {
-        Destroy(GameObject.FindGameObjectWithTag("Object"));
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Object");
+        foreach (GameObject target in targets)
+        {
+            Destroy(target);
+        }
     }
 
     // AssetBundleのアンロード
