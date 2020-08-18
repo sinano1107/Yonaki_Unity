@@ -136,6 +136,7 @@ public class ObjectController : MonoBehaviour
         {
             Destroy(target);
         }
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
     }
 
     // AssetBundleのアンロード
