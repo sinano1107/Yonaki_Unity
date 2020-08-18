@@ -17,7 +17,6 @@ public class AnimationController : MonoBehaviour
         int num = int.Parse(data["num"]);
         devLog.SendLog($"アニメを {data["num"]} に設定します");
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Object");
-        Debug.Log($"うんち {targets.Length}");
         foreach(GameObject target in targets)
         {
             target.GetComponent<Animator>().SetInteger("Animation", num);
