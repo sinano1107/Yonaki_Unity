@@ -48,7 +48,6 @@ public class ObjectController : MonoBehaviour
             }
         };
 
-        UnityMessageManager.Instance.SendMessageToFlutter("next");
         fadeController.isFadeOut = true;
     }
 
@@ -91,6 +90,7 @@ public class ObjectController : MonoBehaviour
             }
         }
 
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
         fadeController.isFadeIn = true;
     }
 
