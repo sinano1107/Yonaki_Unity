@@ -46,11 +46,9 @@ public class ObjectController : MonoBehaviour
                     space
                 ));
             }
-
-            // nextCheck
-            nextController.CheckNext("Create");
         };
 
+        UnityMessageManager.Instance.SendMessageToFlutter("next");
         fadeController.isFadeOut = true;
     }
 
