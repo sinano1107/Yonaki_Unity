@@ -1380,6 +1380,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planeY: 0
+  targetIndicator: {fileID: 7459222511573552524, guid: 172074ecdc9eb444e9276667b91c0a2e,
+    type: 3}
+  canvas: {fileID: 183335891}
 --- !u!114 &605280731
 MonoBehaviour:
   m_ObjectHideFlags: 0
