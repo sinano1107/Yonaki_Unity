@@ -2206,7 +2206,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u624B"
+  m_Text: "\u5E02\u677E"
 --- !u!222 &1250543791
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2691,8 +2691,8 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '{"number": "5", "space": "1", "name": "hand", "crc":
-            "2744243362", "uri": "https://firebasestorage.googleapis.com/v0/b/yonaki.appspot.com/o/prefabs%2Fhand?alt=media&token=a4ef4225-95a2-454a-b8a0-de415771669b"}'
+          m_StringArgument: '{"number": "5", "space": "1", "name": "ichimatu", "crc":
+            "3787310697", "uri": "https://firebasestorage.googleapis.com/v0/b/yonaki.appspot.com/o/prefabs%2Fichimatu?alt=media&token=2fc1af38-2449-40fa-b23b-433fd4322e28"}'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1718754751
