@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Object
   - CH_Object
+  - TargetIndicator
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,9 @@ public class ObjectController : MonoBehaviour
 {
     public float planeY; // 床の高さ
 
+    [SerializeField] private GameObject targetIndicator;
+    [SerializeField] private GameObject canvas;
+
     DevLog devLog;
     FadeController fadeController;
     NextController nextController;
@@ -88,11 +91,25 @@ public class ObjectController : MonoBehaviour
             {
                 obj.tag = "CH_Object";
             }
+            // targetIndicatorを生成
+            BuildTargetIndicator(newObject.transform);
         }
 
         UnityMessageManager.Instance.SendMessageToFlutter("next");
         fadeController.isFadeIn = true;
     }
+
+    // TargetIndicatorの生成
+    void BuildTargetIndicator(Transform target)
+    {
+        GameObject targetIndicator_clone = Instantiate(targetIndicator, new Vector3(0,0,0), Quaternion.identity);
+        // canvas以下へ移動
+        targetIndicator_clone.transform.SetParent(canvas.transform, false);
+        // targetを指定
+        TargetIndicator newTargetIndicator = targetIndicator_clone.GetComponent<TargetIndicator>();
+        newTargetIndicator.target = target;
+    }
+
 
     // ドーナツ状の座標を取得
     Vector3[] RandomPositiones(Vector3 cameraPos, int number, float space) {
